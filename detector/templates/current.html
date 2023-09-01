@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Fake News Detector
+{% endblock %}
+
+{% block body %}
+    <main class="header py-5">
+        <div class="container py-5 mb-1 mt-2" style="background-color: white; border-radius: 10px;opacity: calc(85%);">
+            <div style="margin: 5px auto; width: 70%;">
+                <h1 class="text-center text-dark" style="font-weight: 900; font-family: 'Lato', sans-serif;">Advance Fake News Detector*</h1>
+                
+                <form action="{% url 'current' %}" method="post" style="width: 95%;margin: 0 auto;">
+                    {% csrf_token %}
+                    {% if prompt %}
+                        <label class="form-label mb-5 mt-3 d-block text-center">Recent Search: {{prompt}}</label>
+                    {% else %}
+                        <label class="form-label mb-5 mt-3 d-block text-center">Fully Automated Open AI Based tool for Checking News Content Truthness</label>
+                    {% endif %}
+                    <textarea name="fakenews" class="form-control p-3" cols="30" rows="5" placeholder="Copy and Paste the News Content to check whether the Content is Real or Fake..." maxlength="500" style="border: 2px solid black;"></textarea>
+                    <div class="text-center mt-5 pb-5">
+                        <input type="submit" value="Check for the Truth" class="btn btn-success pb-2">
+                    </div>
+                    <p class="text-center">This was made for Fun in a Hackathon not for use in Real Life.</p>
+                </form>
+                
+                <div class="container my-5">
+                    {% if formatted_response %}
+                        <p style="font-weight: bold;font-size: 20px; line-height: 150%; text-align: justify;" class="mb-5" id="typing"></p>
+                        {% if sources %}
+                            <h3 style="font-weight: bold;">Additional Sources:</h3>
+                        {% endif %}
+                        <div>
+                            {% for source in sources|slice:":5" %}
+                                <p><a href="{{source.url}}" target="_blank" style="text-decoration: none; color: black;">{{source.headline}} ...</a><br> <small style="color: gray;">{{source.publisher}} ,{{source.date | slice:":10"}}</small>
+                                </p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>
+        var typingDiv = document.getElementById('typing');
+        var dynamicContent = "{{ formatted_response }}"; // Use the dynamic content passed from Django
+        var delay = 50; // Delay between typing each character (in milliseconds)
+
+        typingDiv.textContent = ''; // Set the text content to an empty string before starting the typing animation
+
+        function simulateTyping(content) {
+            var i = 0;
+            var interval = setInterval(function() {
+                typingDiv.textContent += content[i];
+                i++;
+                if (i >= content.length) {
+                    clearInterval(interval);
+                }
+            }, delay);
+        }
+
+        simulateTyping(dynamicContent);
+    </script>
+{% endblock %}

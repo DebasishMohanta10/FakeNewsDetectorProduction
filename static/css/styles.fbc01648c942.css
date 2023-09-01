@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Lato', sans-serif;
+}
+
+.header{
+    background-image: url("/static/images/bg1.d9b53e14d3ab.jpg");
+    background-position: center;
+    background-repeat: repeat;
+    background-size: cover;
+    opacity: calc(100%);
+}
+
+.header1{
+    background-image: url("/static/images/bg3.a5931c852d32.jpg");
+    background-position: center;
+    background-repeat: repeat;
+    background-size: cover;
+    opacity: calc(100%);
+}
+
+header div h1{
+    font-size: 60px;
+}
+
+.title--text{
+    display: inline-block;
+    border: 2px solid black;
+    border-radius: 20px;
+    font-size: 20px;
+    padding-top: 7px;
+    padding-bottom: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-family: 'Nunito', sans-serif;
+    color: #c3adad;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+main section div div h3{
+    line-height: 150%;
+    font-family: 'Nunito', sans-serif;
+}
+
+.title{
+    font-size: 40px;
+    line-height: normal;
+    font-family: 'Nunito', sans-serif;
+}
+
+.card img{
+    height: 290px;
+}
